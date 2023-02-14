@@ -1,0 +1,157 @@
+@charset "UTF-8";
+
+body, div, h1, textarea, input, button, a, p {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+  }
+
+#coreDiv{
+    width: 100%;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+}
+
+#marging{
+	width: 440px;
+	height: 100%;
+	float: left;
+}
+
+#position{
+	position: relative;
+	top: 50px;
+	width: 100%;
+	height: 100%;
+}
+
+#contents{
+	position:absolute;
+	margin-top: 100px;  
+	margin-left: 580px;
+	margin-right: 190px;
+	margin-bottom: 400px;
+    width: 1200px;
+	background-color:rgb(255, 255, 255);
+}
+
+.optionBtnDiv{
+    height: 32px;
+    width: 168px;
+    float: right;
+  }
+
+  .optionBtnDiv #fileInsertBtn{
+    margin-left: 3px;
+    margin-right: 3px;
+    width: 80px;
+    height: 32px;
+    border-radius: 5px;
+    border: 1px solid rgb(147, 169, 209);
+    background-color: rgb(147, 169, 209);
+    font-size: 15px;
+    font-weight:bold;
+    float: right;
+    color: white;
+}
+
+.optionBtnDiv #cancleBtn{
+    width: 80px;
+    height: 32px;
+    border-radius: 5px;
+    border: 1px solid rgb(147, 169, 209);
+    background-color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight:bold;
+    float: right;
+    color: black;
+}
+
+#fileBoard-TitleDiv{
+    float: left;
+    border: 1px solid rgb(158, 158, 158);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+    width: 100%;
+}
+
+#fileTitle{
+    border: none;
+    width: 1175px;
+    height: 30px;
+    padding-left: 15px;
+    font-size: 18px;
+}
+
+#fileBoard-ContentDiv{
+    border: 1px solid rgb(158, 158, 158);
+    overflow:hidden;
+    height: 650px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#fileContent{
+    border: none;
+    padding: 15px 15px 15px 15px;
+    height: 620px;
+    width: 1170px;
+    font-size: 18px;
+}
+
+.fileDiv{
+    width: 100%;
+    height: 40px;
+}
+
+.fileDiv label{
+    width: 60px;
+    height: 28px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    border-radius: 5px;
+    border: 1px solid rgb(147, 169, 209);
+    background-color: rgb(147, 169, 209);
+    font-size: 15px;
+    font-weight:bold;
+    line-height: normal;
+    vertical-align: middle;
+    color: white;
+    float: left;
+}
+
+.fileDiv input[type="file"] { 
+    position: absolute; 
+    width: 1px; 
+    height: 1px; 
+    padding: 0; 
+    margin: -1px;
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0; 
+}
+
+.fileDiv .upload-name {
+    padding-top: 4px;
+    padding-left: 10px;
+    font-size: inherit; 
+    font-family: inherit; 
+    line-height: normal; 
+    height: 28px;
+    width: 90%;
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 1px solid rgb(158, 158, 158); 
+    border-bottom-color: #e2e2e2; 
+    /* border-radius: .25em; -webkit-appearance: none;
+     /* 네이티브 외형 감추기 -moz-appearance: none;  */
+    appearance: none;
+    float: left;
+}

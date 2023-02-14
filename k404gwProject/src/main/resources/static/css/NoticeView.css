@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+body, div, h1, textarea, input, button, a, p {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+  }
+
+#coreDiv{
+    width: 100%;
+    background-color:rgb(255, 255, 255);
+}
+
+#marging{
+	width: 220px;
+	height: 100%;
+	float: left;
+}
+
+#position{
+	position: relative;
+	top: 50px;
+	width: 100%;
+	height: 100%;
+}
+
+#contents{
+	position:absolute;
+	margin-top: 100px;
+	margin-left: 580px;
+	margin-right: 190px;
+	margin-bottom: 400px;
+    width: 1200px;
+	background-color:rgb(255, 255, 255);
+}
+
+
+.WriteDiv{
+    margin-top: 15px;
+    height: 20px;
+    width: 600px;
+    float: left;
+}
+
+
+.dateDiv{
+  margin-top: 15px;
+  height: 20px;
+  width: 150px;
+  float: right;
+  margin-right: 10px;
+}
+
+
+.optionBtnDiv{
+    height: 45px;
+    width: auto;
+    float: right;
+  }
+
+
+.optionBtnDiv #upload{
+    margin-left: 5px;
+    width: 80px;
+    height: 45px;
+    border-radius: 5px;
+    border: 1px solid rgb(147, 169, 209);
+    background-color: rgb(147, 169, 209);
+    font-size: 15px;
+    font-weight:bold;
+    float: right;
+    color: white;
+}
+
+.optionBtnDiv #delete{
+    margin-left: 5px;
+    width: 80px;
+    height: 45px;
+    border-radius: 5px;
+    border: 1px solid rgb(147, 169, 209);
+    background-color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight:bold;
+    float: right;
+    color: black;
+}
+
+.optionBtnDiv #return{
+    width: 80px;
+    height: 45px;
+    border-radius: 5px;
+    border: 1px solid rgb(147, 169, 209);
+    background-color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight:bold;
+    float: right;
+    color: black;
+}
+
+#file-TileDiv{
+    float: left;
+    border: 1px solid rgb(158, 158, 158);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 100%;
+    padding : 3px 3px 3px 20px;
+}
+
+#file-ContentDiv{
+    border: 1px solid rgb(158, 158, 158);
+    overflow:hidden;
+    min-height : 500px;
+    height:auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding : 30px 5px 5px 20px;
+}
+
+#file-downloadDiv{
+    border: 1px solid rgb(158, 158, 158);
+    height:25px;
+    width: 1220px;
+    padding : 2px 2px 2px 2px;
+    margin-top: 15px;
+    margin-left:auto;
+    margin-right:auto;
+}

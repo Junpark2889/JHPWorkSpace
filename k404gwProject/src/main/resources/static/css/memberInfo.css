@@ -1,0 +1,21 @@
+@charset "UTF-8";
+.t-info {
+	margin: 10px 255px;
+	border-collapse: collapse;
+	text-align: center;
+}
+.t-info td {
+	border: 1px solid rgb(224, 224, 224);
+	width: 262px;
+	height: 50px;
+}
+.t-info .td-left {
+	background: rgba(224, 224, 224, 0.5);
+}
+.t-info img {
+	width: 262px;
+	height: 262px;
+	image-rendering: -webkit-optimize-contrast;
+	object-fit: cover;
+	display: block;
+}

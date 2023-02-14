@@ -1,0 +1,183 @@
+@charset "UTF-8";
+* {
+    margin: 0 auto;
+    padding: 0;
+}
+html {
+	width: 100%;
+	height: 100%;
+}
+body {
+	width: 100%;
+	margin: 220px auto;
+}
+header {
+	font-weight: bold;
+	text-align: center;
+	color: rgb(117, 144, 194);	
+}
+.logo{
+	font-size : 75px;
+	font-weight: lighter;
+	font-family: 'Changa', sans-serif;
+	margin-left: 10px;
+}
+.d-login{
+	padding: 45px 0;
+	text-align: center;
+	border: 1px solid rgba(94, 94, 94, 0.3);
+	border-radius: 4px;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.08);	
+	width: 718px;	
+}
+.d-loginBox {
+    width: 452px;
+}
+.d-id, .d-pw {
+	display: flex;
+	justify-content: center;
+}
+.d-gender {
+    display: flex;
+	justify-content: center;    
+}
+.l-text{
+	font-weight: lighter;
+	font-family: 'Changa', sans-serif;
+	display: inline-flex;
+	width: 175px;
+	font-size: 20px;
+	margin: 0;
+}
+.d-gender .l-text {
+    width: 175px;
+}
+.i-login{
+	width: 250px;
+	display: inline-flex;
+	margin: 7px;
+	padding: 0 5px;
+	border: 1px solid rgba(94, 94, 94, 0.7);
+	border-radius: 4px;
+	font-size: 15px;
+}
+.radio {
+	width : 10px;
+}
+.gd-radio {
+    margin-left: 0px;
+}
+.d-chk {
+	text-align: right;
+	margin: 5px 140px;
+	color: rgba(51, 51, 51, 0.8);
+}
+.login-btn {
+	background: rgb(117, 144, 194);
+	color: white;
+	width: 300px;
+	height: 50px;
+	border: none;
+	border-radius: 4px;
+	font-size: 17px;
+	margin: 20px 0 7px 0;
+}
+/* 비밀번호 변경 모달 */
+.d-password {
+	background-color:rgba(0,0,0,.3);
+	justify-content:center;
+	align-items:center;
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	display:none;
+	padding:15px;
+	z-index: 1000;
+	width:100%;
+}
+	.m-password {
+		width:100%;
+		max-width:500px;
+		background-color:#ffffff;
+		border-radius: 3px;
+		overflow:hidden;
+		box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
+	}
+	.h-password {
+		width:100%;
+		margin-top: 20px;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		font-size: 20px;
+	}
+	.h-p-logo {
+		color: rgb(117, 144, 194);
+		font-size: 35px;
+		font-weight: lighter;
+		font-family: 'Changa', sans-serif;
+	}
+	.h-p-text {
+		color: black;
+		margin-left: 5px;
+		margin-top: 4px;
+	}
+	.m-password form {
+		width: calc(100% - 100px);
+		padding: 0 50px;
+		justify-content: center;
+		text-align: center;
+	}
+	.s-p-text, .s-p-input{
+		display: inline-flex;
+		width: 350px;
+		height: 50px;
+		font-size: 18px;
+		justify-content: center;
+		align-items: center;
+	}
+	.s-p-input {
+		border-radius: 4px;
+		border: solid 1px rgb(190, 190, 190);
+		padding-left: 10px;
+	}
+	.chk-password {
+		display: inline-block;
+		width: 350px;
+		height: 50px;
+		font-size: 18px;
+		vertical-align: middle;
+		text-align: center;
+		line-height: 50px;
+		color: red;
+	}
+	.f-password {
+		width: calc(100% - 50px);
+		height:80px;
+		display:flex;
+		margin: 0 25px 10px;
+		justify-content:center;
+		border-top: solid 1px rgb(190, 190, 190);
+	}
+	.pw-cancle, .pw-confirm {
+		display:inline-flex;
+		justify-content:center;
+		width:100px;
+		height:35px;
+		align-items:center;
+		cursor:pointer;
+		margin-top: 20px;
+		font-size: 14px;
+		background: transparent;
+		border: none;
+		font-size: 17px;
+	}
+	.pw-cancle {
+		margin-right: 10px;
+	}
+	.pw-confirm {
+		margin-left: 10px;
+		color: rgb(77, 112, 171);
+	}
