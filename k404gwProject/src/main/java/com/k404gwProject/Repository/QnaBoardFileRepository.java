@@ -11,4 +11,5 @@ import com.k404gwProject.Entity.QnaBoardFile;
 @Repository
 public interface QnaBoardFileRepository extends JpaRepository<QnaBoardFile, Long>{
 	List<QnaBoardFile> findByQnaNoOrderByIdAsc(Board qnaNo);
+	QnaBoardFile findByOriFileName(String oriFileName);
 }

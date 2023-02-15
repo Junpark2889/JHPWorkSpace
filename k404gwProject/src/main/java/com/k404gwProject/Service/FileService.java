@@ -10,20 +10,28 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.imgscalr.Scalr;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.k404gwProject.Entity.QnaBoardFile;
+import com.k404gwProject.Repository.QnaBoardFileRepository;
 
 import lombok.extern.java.Log;
 
 @Service
 @Log
 public class FileService {
+	
+	@Autowired
+	private QnaBoardFileRepository qnaBoardFileRepository;
 	// byte[] fileData
     public String uploadFile(MultipartFile file, HttpServletRequest request) throws Exception{
-
+    	
     	String originalFileName = file.getOriginalFilename(); // 파일명
         byte[] fileData = file.getBytes();  // 파일 데이터
         // 1. 파일명 중복 방지 처리
@@ -44,19 +52,26 @@ public class FileService {
     }
     
     // 파일 삭제 처리
-    public static void deleteFile(String fileName, HttpServletRequest request) {
-
+    @Transactional
+    public  void deleteFile(String fileName, HttpServletRequest request) {
+    	QnaBoardFile test = qnaBoardFileRepository.findByOriFileName(fileName);
+    
         String rootPath = getRootPath(fileName, request); // 기본경로 추출(이미지 or 일반파일)
-
         // 1. 원본 이미지 파일 삭제
         MediaType mediaType = MediaUtils.getMediaType(fileName);
         if (mediaType != null) {
             String originalImg = fileName.substring(0, 12) + fileName.substring(14);
             new File(rootPath + originalImg.replace('/', File.separatorChar)).delete();
+            if (test==null) {
+            	return;
+            }
+            qnaBoardFileRepository.delete(test);
+            
         }
 
         // 2. 파일 삭제(썸네일이미지 or 일반파일)
         new File(rootPath + fileName.replace('/', File.separatorChar)).delete();
+
     }
 
     // 파일 출력을 위한 HttpHeader 설정
@@ -121,7 +136,6 @@ public class FileService {
             File dirPath = new File(uploadPath + path);
             if (!dirPath.exists())
                 dirPath.mkdir();
-
         }
     }
 

@@ -22,6 +22,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")	
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	compileOnly("org.projectlombok:lombok")
@@ -32,6 +33,8 @@ dependencies {
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
 	implementation("commons-fileupload:commons-fileupload:1.4")
 	implementation("org.imgscalr:imgscalr-lib:4.2")
+	implementation("org.javassist:javassist:3.27.0-GA")
+	
 }
 
 tasks.withType<Test> {

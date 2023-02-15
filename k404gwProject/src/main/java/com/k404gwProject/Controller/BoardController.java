@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.k404gwProject.Dto.BoardDto;
@@ -170,7 +171,26 @@ public class BoardController {
     	 
     	 return entity;
     }
- 
+    // 게시글 파일 전체 삭제
+    @PostMapping(value = "/deleteAll")
+    public ResponseEntity<String> deleteAllFiles(@RequestParam("files[]") String[] files, HttpServletRequest request) {
+
+        if (files == null || files.length == 0)
+            return new ResponseEntity<>("DELETED", HttpStatus.OK);
+
+        ResponseEntity<String> entity = null;
+
+        try {
+            for (String fileName : files)
+                fileService.deleteFile(fileName, request);
+            entity = new ResponseEntity<>("DELETED", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+        return entity;
+    }
 	
 	@GetMapping(value="/boardDtl/{id}")
 	public String boardDtl(@PathVariable("id") Long id, Model model) {
@@ -194,11 +214,12 @@ public class BoardController {
 	
 	// 수정하기
 	@PostMapping(value="/mdForm/{id}")
-	public String MdBoard(@PathVariable("id") Long id, BoardDto boardDto, Model model) {
+	public String MdBoard(@PathVariable("id")Long id, @PathVariable("id") Board qnaNo, BoardDto boardDto, Model model) {
+		System.out.println("컨트롤러 수정 qnaNo 값 :" + qnaNo);
 		BoardDto boardDtl2 = boardService.boardDtl(id);
 		System.out.println("수정전  boardDtl2.getTitle()에는 뭐가 들어있을까요?"+boardDtl2.getTitle());		
 		
-		boardService.updateQboard(boardDto);		
+		boardService.updateQboard(boardDto, id, qnaNo);		
 		BoardDto boardDtl = boardService.boardDtl(id);
 		
 		System.out.println("title 모 야?"+id);

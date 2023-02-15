@@ -72,7 +72,8 @@ public class MemberController {
 			 return "welcome";
 		 } else {
 				HttpSession session = request.getSession();
-				session.setAttribute("email", loginMember);		
+				session.setAttribute("email", loginMember);	
+				session.setMaxInactiveInterval(60*60) ;
 				return "redirect:/main";
 		 }
 		

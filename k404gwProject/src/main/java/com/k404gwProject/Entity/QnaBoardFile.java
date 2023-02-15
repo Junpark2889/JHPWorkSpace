@@ -24,7 +24,6 @@ import lombok.ToString;
 		)
 @Table(name="qna_board_img")
 @Getter @Setter
-@ToString
 public class QnaBoardFile extends BaseEntity {
 	@Id
 	@Column(name="qna_img_id")

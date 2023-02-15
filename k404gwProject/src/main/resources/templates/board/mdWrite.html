@@ -19,7 +19,14 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-
+        <link rel="stylesheet"  href="/css/lightbox.css">
+	<style>
+		.fileDrop {
+    		width: 100%;
+    		height: 200px;
+    		border: 2px dotted #0b58a2;
+		}
+	</style>
 </head>
 
 <body id="page-top">
@@ -361,7 +368,7 @@
 
                     <!-- Page Heading -->
                     <div class="col-lg-12">
-    <form role="form" id="writeForm"  th:object="${boardDto}" >
+    <form  role="form" id="modifyForm"  th:object="${boardDto}"  action=""  method=""   >  
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">게시글 작성</h3>                
@@ -381,7 +388,7 @@
                     <label for="writer" >작성자</label>
                     <input class="form-control"  th:name ="name"  th:value="${session.email['name']}"  readOnly>
                 </div>
-                <%--첨부파일 영역 추가--%>
+<!--                 <%--첨부파일 영역 추가--%> -->
                 <div class="form-group">
                     <div class="fileDrop">
                         <br/>
@@ -391,7 +398,7 @@
                         <p class="text-center"><i class="fa fa-paperclip"></i> 첨부파일을 드래그해주세요.</p>
                     </div>
                 </div>
-                <%--첨부파일 영역 추가--%>
+<!--                 <%--첨부파일 영역 추가--%> -->
             </div>
             <div class="box-footer">
                 <ul class="mailbox-attachments clearfix uploadedFileList"></ul>
@@ -399,8 +406,11 @@
             <div class="box-footer">
                 <button type="button" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-warning" th:formaction="'/board/delete/'+${board.id}" th:formmethod="get"><i class="fa fa-reply"></i> 삭제</button>
-                    <button type="submit"  class="btn btn-success" th:formaction="'/board/mdForm/'+${board.id}" th:formmethod="post"><i class="fa fa-save"></i> 저장</button>
+<!--                     <button type="submit"  id = "delButton" class="btn btn-warning delBoard"  th:formaction="'/board/delete/'+${board.id}" th:formmethod="get"><i class="fa fa-reply"></i> 삭제</button> -->
+<!--                     <button type="submit"  id = "saveButton" class="btn btn-success"  th:formaction="'/board/mdForm/'+${board.id}"  th:formmethod="post"><i class="fa fa-save"></i> 저장</button> -->
+   <button type="submit"  id = "delButton" class="btn btn-warning delBoard"  ><i class="fa fa-reply"></i> 삭제</button>
+                    <button type="submit"  id = "saveButton" class="btn btn-success"  ><i class="fa fa-save"></i> 저장</button>
+     		
                 </div>
             </div>
         </div>
@@ -448,7 +458,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -463,7 +473,50 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+   <script id="fileTemplate"  type="text/x-handlebars-template">
+    <li data-src="{{fullName}}">
+        <span class="mailbox-attachment-icon has-img">
+            <img src="{{imgSrc}}" alt="Attachment">
+        </span>
+        <div class="mailbox-attachment-info">
+            <a href="{{originalFileUrl}}" class="mailbox-attachment-name">
+                <i class="fa fa-paperclip">{{originalFileName}}</i> 
+            </a>
+            <a href="{{fullName}}" class="btn btn-default btn-xs pull-right delBtn">
+                <i class="fa fa-fw fa-remove"><img src="/img/close.png"></i>
+            </a>
+        </div>
+    </li>
+	</script>
+	<script th:inline = "javascript">
+		var boardNum = "[[${board.id}]]";
+		var qnaNo="[[${board.id}]]";
+		$("#delButton").on('click',function() {
+			$("#modifyForm").attr("action","/board/delete/" + boardNum);
+			$("#modifyForm").attr("method","get");
+			$("#modifyForm").submit();
+		})
+		
+		$("#saveButton").on('click', function() {
+			$("#modifyForm").attr("action","/board/mdForm/" + qnaNo);
+			$("#modifyForm").attr("method","post");
 
+		    var str = "";
+		    $(".uploadedFileList .delBtn").each(function (index) {
+		        str += "<input type='hidden' name='files[" + index + "]' value='" +$(this).attr("href")+ "'>"
+		    });
+		// $(this).attr("href")   
+			$("#modifyForm").append(str);
+			$("#modifyForm").get(0);
+			$("#modifyForm").submit();
+		})
+	</script>
+	<script src ="/js/BoardDtl.js" type="text/javascript"></script>
+	<script th:inline ="javascript">
+		getFiles(qnaNo);
+	</script>
+		<script src="/js/lightbox.js"></script>
 </body>
 
 </html>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.k404gwProject.Dto.BoardDto;
+import com.k404gwProject.Entity.Board;
 
 public interface BoardService {
 	
@@ -18,6 +19,6 @@ public interface BoardService {
 	public void createQboard(String title, String content, String name, HttpSession session, BoardDto boardDto, MultipartFile file, HttpServletRequest request);
 	public List<BoardDto> findAll();
 	public BoardDto boardDtl(Long id);
-	public Long updateQboard(BoardDto boardDto);
+	public void updateQboard(BoardDto boardDto, Long id, Board qnaNo);
 	public void deleteQboard(BoardDto boardDto);
 }

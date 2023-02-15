@@ -31,12 +31,6 @@ public class BoardFileServiceImpl implements BoardFileService {
 			boardFileDtl.setFileName(boardFile.getFileName());
 			boardFileDtl.setOriFileName(boardFile.getOriFileName());
 			boardFileDtlTest.add(boardFileDtl);
-//			boardFileDtlTest2 = boardFileDtl.toQnaBoardFileDto(boardFile);
-//			System.out.println("boardFileDtl : " + boardFileDtl);
-//			System.out.println("boardFileDtlTest2 : "+ boardFileDtlTest2);
-//			System.out.println("boardFileDtlTest2의 길이 : "+ boardFileDtlTest2.size());
-//			boardFileDtlTest = boardFileDtlTest2;
-//			System.out.println("boardFileDtlTest: " + boardFileDtlTest);
 			
 		}
 		System.out.println("boardFileDtlTest :" + boardFileDtlTest);

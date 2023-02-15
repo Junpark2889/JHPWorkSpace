@@ -21,6 +21,8 @@ fileDropDiv.on("drop", function (event) {
     // drop 이벤트 발생시 전달된 파일 데이터
     var files = event.originalEvent.dataTransfer.files;
     console.log("드롭 이벤트 시 files : " + files);
+        const testFile = JSON.stringify(files);
+    console.log("드롭 이벤트 시 files : " + testFile);
     // 단일 파일 데이터만을 처리하기 때문 첫번째 파일만 저장
     var file = files[0];
     // formData 객체 생성, 파일데이터 저장
@@ -80,7 +82,7 @@ function printFiles(data) {
 
 // 게시글 입력/수정 submit 처리시에 첨부파일 정보도 함께 처리
 function filesSubmit(that) {
-
+	
     var str = "";
     $(".uploadedFileList .delBtn").each(function (index) {
         str += "<input type='hidden' name='files[" + index + "]' value='" +$(this).attr("href")+ "'>"
@@ -120,12 +122,13 @@ function deleteFile(url, that) {
 
 // 파일 정보 처리
 function getFileInfo(fullName) {
+	console.log(fullName);	
 	console.log("getFileInfo 실행했니?");
     var originalFileName;   // 화면에 출력할 파일명
     var imgSrc;             // 썸네일 or 파일아이콘 이미지 파일 출력 요청 URL
     var originalFileUrl;    // 원본파일 요청 URL
     var uuidFileName;       // 날짜경로를 제외한 나머지 파일명 (UUID_파일명.확장자)
-
+	
     // 이미지 파일이면
     if (checkImageType(fullName)) {
         imgSrc = "/board/display?fileName=" + fullName; // 썸네일 이미지 링크
@@ -150,16 +153,18 @@ function getFileInfo(fullName) {
 
 // 이미지 파일 유무 확인
 function checkImageType(fullName) {
-    var pattern = /jpg$|gif$|png$|jpge$/i;
+    var pattern = /jpg$|gif$|png$|jpeg$/i;
     return fullName.match(pattern);
 }
 
 // 게시글 저장 버튼 클릭 이벤트 처리
-$("#writeForm").submit(function (event) {
+
+	$("#writeForm").submit(function (event) {
     event.preventDefault();
     var that = $(this);
     filesSubmit(that);
 });
+
 
 // 파일 삭제 버튼 클릭 이벤트
 $(document).on("click", ".delBtn", function (event) {
@@ -202,12 +207,12 @@ $(".delBtn").on("click", function () {
 
     // 첨부파일 삭제요청
     if (arr.length > 0) {
-        $.post("/article/file/deleteAll", {files: arr}, function () {
+        $.post("/board/deleteAll", {files: arr}, function () {
 
         });
     }
 
     // 삭제처리
-    formObj.attr("action", "/article/paging/search/remove");
+    formObj.attr("action", "/board/delete/"+ boardNum);
     formObj.submit();
 });

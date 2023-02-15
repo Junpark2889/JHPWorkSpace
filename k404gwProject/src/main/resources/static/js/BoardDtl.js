@@ -20,12 +20,16 @@ fileDropDiv.on("drop", function (event) {
     // drop 이벤트 발생시 전달된 파일 데이터
     var files = event.originalEvent.dataTransfer.files;
     console.log("드롭 이벤트 시 files : " + files);
+    const testFile = JSON.stringify(files);
+    console.log("드롭 이벤트 시 files : " + testFile);
     // 단일 파일 데이터만을 처리하기 때문 첫번째 파일만 저장
     var file = files[0];
     // formData 객체 생성, 파일데이터 저장
     var formData = new FormData();
-    formData.append("file", files);
+    formData.append("file", file);
     console.log("드롭 이벤트 시 formData :" + formData);
+     const testFile2 = JSON.stringify(formData);
+         console.log("드롭 이벤트 시 formData :" + testFile2);
     // 파일 업로드 AJAX 통신 메서드 호출
     uploadFile(formData);
 });
@@ -123,7 +127,6 @@ function getFileInfo(fullName) {
     if (checkImageType(fullName)) {
         imgSrc = "/board/display?fileName=" + fullName; // 썸네일 이미지 링크
         uuidFileName = fullName.substr(14);
-        
         console.log("자바스크립트의 uuidFileName : " + uuidFileName);
         var originalImg = fullName.substr(0, 12) + fullName.substr(14);
         // 원본 이미지 요청 링크
@@ -133,6 +136,8 @@ function getFileInfo(fullName) {
         uuidFileName = fullName.substr(12);
         // 파일 다운로드 요청 링크
         originalFileUrl = "/board/display?fileName=" + fullName;
+        
+  
     }
     originalFileName = uuidFileName.substr(uuidFileName.indexOf("_") + 1);
 //	var testUp = {originalFileName: originalFileName, imgSrc: imgSrc, originalFileUrl: originalFileUrl, fullName: fullName};
@@ -148,11 +153,20 @@ function checkImageType(fullName) {
 }
 
 // 게시글 저장 버튼 클릭 이벤트 처리
-$("#writeForm").submit(function (event) {
-    event.preventDefault();
-    var that = $(this);
-    filesSubmit(that);
-});
+//$("#writeForm2").submit(function (event) {
+//    event.preventDefault();
+//    var that = $(this);
+//    filesSubmit(that);
+//});
+//// 수정 처리시 첨부파일 정보도 함께 처리
+//$("#modifyForm").submit(function (event) {
+//    event.preventDefault();
+//    var that = $(this);
+//    filesSubmit(that);
+//});
+
+
+
 
 // 파일 삭제 버튼 클릭 이벤트
 $(document).on("click", ".delBtn", function (event) {
@@ -178,40 +192,40 @@ function getFiles(qnaNo) {
        })
    });
 }
-//// 현재 게시글 번호
+////// 현재 게시글 번호
 //var qnaNo = "[[${boardFile}]]";
 //// 첨부파일 목록
 //getFiles(qnaNo);
 
 // 게시글 삭제 클릭 이벤트
-$(".delBtn").on("click", function () {
-
-    // 댓글이 달린 게시글 삭제처리 방지
+$("#delButton").on("click", function () {
+//
+//    // 댓글이 달린 게시글 삭제처리 방지
     var replyCnt = $(".replyDiv").length;
-    if (replyCnt > 0) {
+   if (replyCnt > 0) {
         alert("댓글이 달린 게시글은 삭제할수 없습니다.");
-        return;
+      return;
     }
-
-    // 첨부파일명들을 배열에 저장
+//
+//    // 첨부파일명들을 배열에 저장
     var arr = [];
     $(".uploadedFileList li").each(function () {
         arr.push($(this).attr("data-src"));
-    });
+   });
+    console.log("arr 에 들어있는 값 :" + arr);
 
-    // 첨부파일 삭제요청
+//    // 첨부파일 삭제요청
     if (arr.length > 0) {
-        $.post("/article/file/deleteAll", {files: arr}, function () {
+       $.post("/board/deleteAll", {files: arr}, function () {
 
-        });
+       });
     }
-
-    // 삭제처리
-    formObj.attr("action", "/article/paging/search/remove");
-    formObj.submit();
+//
+//    // 삭제처리
+////    formObj.attr("action", "/board/delete" + boardNum);
+////    formObj.submit();
 });
 // 현재 게시글 번호
 //var qnaNo = "[[${board.id}]]";
 
 // 첨부파일 목록
-getFiles(qnaNo);

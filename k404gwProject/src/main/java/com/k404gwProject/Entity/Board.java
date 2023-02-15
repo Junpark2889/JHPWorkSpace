@@ -1,5 +1,7 @@
 package com.k404gwProject.Entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -15,7 +19,9 @@ import org.hibernate.annotations.ColumnDefault;
 
 import com.k404gwProject.Dto.BoardDto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @SequenceGenerator(
@@ -25,7 +31,8 @@ import lombok.Data;
 		allocationSize=1 // 메모리 통해 할당할 범위 사이즈, 1로 설정시 insert할때마다 시퀀스 호출
 		)
 @Table(name="board")
-@Data
+@Getter @Setter
+@ToString
 public class Board extends BaseEntity {
 	
 	@Id
@@ -58,6 +65,8 @@ public class Board extends BaseEntity {
 	@ColumnDefault("0")
 	private int fileCnt;
 	
+	@OneToMany(mappedBy = "qnaNo",  orphanRemoval=true)
+	private List<QnaBoardFile> qnaBoardFileList;
 //	@Enumerated(EnumType.STRING)
 //	private Subject subject;	
 	
@@ -71,10 +80,7 @@ public class Board extends BaseEntity {
 	}
 	
 	public void updateBoard(BoardDto boardDto ) {
-		System.out.println("엔티티 updateBoard 실행전 this.title 에는 무슨 값이 들어있을까?"+this.title);
 		this.title = boardDto.getTitle();
-		System.out.println("엔티티 updateBoard 실행후 boardDto.getTitle()에는 무슨 값이 들어있을까?"+boardDto.getTitle());
-		System.out.println("엔티티 updateBoard 실행후 this.title 에는 무슨 값이 들어있을까?"+this.title);
 		this.content = boardDto.getContent();
 		this.setUpdateTime(boardDto.getRegTime());		
 	}

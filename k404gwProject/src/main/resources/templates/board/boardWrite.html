@@ -401,10 +401,10 @@
                 <ul class="mailbox-attachments clearfix uploadedFileList"></ul>
             </div>
             <div class="box-footer">
-                <button type="button" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
+                <a href="/board/list" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</a>
                 <div class="pull-right">
                     <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
-                    <button type="submit"  class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
+                    <button type="submit"   id = "saveButton" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
                 </div>
             </div>
         </div>
@@ -452,7 +452,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -472,7 +472,7 @@
     
     <script id="fileTemplate"  type="text/x-handlebars-template">
     <li data-src="{{fullName}}">
-        <span class="mailbox-attachment-icon has-img">
+        <span id = "testImg" class="mailbox-attachment-icon has-img">
             <img src="{{imgSrc}}" alt="Attachment">
         </span>
         <div class="mailbox-attachment-info">

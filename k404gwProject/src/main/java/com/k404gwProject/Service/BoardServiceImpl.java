@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.k404gwProject.Dto.BoardDto;
-import com.k404gwProject.Dto.QnaBoardFileDto;
 import com.k404gwProject.Entity.Board;
 import com.k404gwProject.Entity.Member;
 import com.k404gwProject.Entity.QnaBoardFile;
@@ -43,7 +42,8 @@ public class BoardServiceImpl implements BoardService {
 		Member sessionMember = (Member) session.getAttribute("email");
 		String email = sessionMember.getEmail();
 		Member LoginMember = memberRepository.findByEmail(email);
-		Board newBoard = new Board(LoginMember, title, content, name);		
+		Board newBoard = new Board(LoginMember, title, content, name);	
+		System.out.println("글쓰기 boardDto : " + boardDto);
 		String[] files = boardDto.getFiles();
 		 boardRepository.save(newBoard);
 		 
@@ -93,18 +93,35 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	@Transactional
-	public Long updateQboard(BoardDto boardDto) {
-		Board board = boardRepository.findById(boardDto.getId()).orElseThrow(EntityNotFoundException::new);	
+	public void updateQboard(BoardDto boardDto, Long id, Board qnaNo) {
+		System.out.println("서비스 id 값 :" + id);
+		System.out.println("서비스 id 값 dto 형으로 :" + boardDto.getId());
+		Board board = boardRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 		board.updateBoard(boardDto);
+		String[] files = boardDto.getFiles();
+
 //		boardRepository.save(board2);
+		List<QnaBoardFile> testFilesList = qnaBoardFileRepository.findByQnaNoOrderByIdAsc(qnaNo);
+		for (QnaBoardFile testFiles : testFilesList)  {
+				qnaBoardFileRepository.delete(testFiles);
+		}
 		
-		return board.getId();
+		
+		 if(files == null)
+			 return;
+		 
+		 for (String fullName : files){
+			 String testFileName = fullName.substring(14);
+			 QnaBoardFile test22 = new QnaBoardFile(board, testFileName, fullName);
+			 
+		 	qnaBoardFileRepository.save(test22);
+		 }
+		
 	}
 
 	@Override
 	public void deleteQboard(BoardDto boardDto) {
-		boardRepository.deleteById(boardDto.getId());
-		
+		boardRepository.deleteById(boardDto.getId());		
 	}
 	
 	
